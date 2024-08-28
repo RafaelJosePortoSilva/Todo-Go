@@ -37,9 +37,9 @@ func main() {
 		case "2":
 			addTask(&tasks)
 		case "3":
-			marktaskCompleted(&tasks)
+			markTaskCompleted(&tasks)
 		case "4":
-			saveTasksToFile(&tasks)
+			saveTasksToFile(tasks)
 		case "5":
 			fmt.Println("Exiting from ToDo-App...")
 			return
@@ -104,4 +104,22 @@ func markTaskCompleted(tasks *[]Task) {
 	(*tasks)[taskIndex-1].Completed = true
 	fmt.Println("Tasks marked as completed.")
 
+}
+
+func saveTasksToFile(tasks []Task) {
+
+	file, err := os.Create("tasks.txt")
+	if err != nil {
+		println("Error creating file: ", err)
+		return
+	}
+	defer file.Close()
+	for _, task := range tasks {
+		status := " "
+		if task.Completed {
+			status = "x"
+		}
+		file.WriteString(fmt.Sprintf("[%s] %s\n", status, task.Text))
+	}
+	fmt.Println("Tasks saved to file 'tasks.txt'.")
 }

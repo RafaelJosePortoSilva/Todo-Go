@@ -7,6 +7,7 @@ import (
 	_ "fmt"
 	"os"
 	_ "os"
+	"strconv"
 	_ "strconv"
 	"strings"
 	_ "strings"
@@ -89,4 +90,18 @@ func addTask(tasks *[]Task) {
 	taskText := getUserInput("Enter task description:")
 	*tasks = append(*tasks, Task{Text: taskText})
 	fmt.Println("Task added.")
+}
+
+func markTaskCompleted(tasks *[]Task) {
+	showTasks(*tasks)
+	taskIndexStr := getUserInput("Enter task number as completed")
+
+	taskIndex, err := strconv.Atoi(taskIndexStr)
+	if err != nil {
+		fmt.Println("Invalid task number. Please, try again.")
+		return
+	}
+	(*tasks)[taskIndex-1].Completed = true
+	fmt.Println("Tasks marked as completed.")
+
 }

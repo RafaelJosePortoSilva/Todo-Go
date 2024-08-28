@@ -67,3 +67,20 @@ func getUserInput(prompt string) string {
 	input, _ := reader.ReadString('\n')
 	return strings.TrimSpace(input)
 }
+
+func showTasks(tasks []Task) {
+	if len(tasks) == 0 {
+		fmt.Println("No tasks available.")
+		return
+	}
+
+	fmt.Println("Tasks:")
+	for i, task := range tasks {
+		status := " "
+		if task.Completed {
+			status = "x"
+		}
+		fmt.Printf("%d, [%s] %s\n", i+1, status, task.Text)
+	}
+
+}

@@ -84,3 +84,9 @@ func showTasks(tasks []Task) {
 	}
 
 }
+
+func addTask(tasks *[]Task) {
+	taskText := getUserInput("Enter task description:")
+	*tasks = append(*tasks, Task{Text: taskText})
+	fmt.Println("Task added.")
+}

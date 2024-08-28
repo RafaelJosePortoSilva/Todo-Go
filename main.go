@@ -1,11 +1,14 @@
 package main
 
 import (
+	"bufio"
 	_ "bufio"
 	"fmt"
 	_ "fmt"
+	"os"
 	_ "os"
 	_ "strconv"
+	"strings"
 	_ "strings"
 )
 
@@ -56,4 +59,11 @@ func showMenu() {
 	fmt.Println("[4] Save Tasks to File")
 	fmt.Println("[5] Exit")
 
+}
+
+func getUserInput(prompt string) string {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println(prompt)
+	input, _ := reader.ReadString('\n')
+	return strings.TrimSpace(input)
 }
